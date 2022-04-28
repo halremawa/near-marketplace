@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { utils } from "near-api-js";
 import { Card, Button, Col, Badge, Stack } from "react-bootstrap";
 
-const Product = ({ product, buy }) => {
+import EditProduct from "./EditProduct";
+
+  
+
+const Product = ({ product, buy, edit }) => {
   const { id, price, name, description, sold, location, image, owner } =
     product;
 
@@ -31,6 +35,12 @@ const Product = ({ product, buy }) => {
           <Card.Text className="text-secondary">
             <span>{location}</span>
           </Card.Text>
+
+
+
+          <EditProduct product={product} save={edit} />
+            
+
           <Button
             variant="outline-dark"
             onClick={triggerBuy}

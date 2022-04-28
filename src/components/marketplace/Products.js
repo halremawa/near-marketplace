@@ -9,6 +9,7 @@ import {
   getProducts as getProductList,
   buyProduct,
   createProduct,
+  editProduct,
 } from "../../utils/marketplace";
 
 const Products = () => {
@@ -42,6 +43,21 @@ const Products = () => {
         }
       };
 
+      const edit = async (data) => {
+          try {
+            setLoading(true);
+            editProduct(data).then((resp) => {
+              getProducts();
+            });
+            toast(<NotificationSuccess text="Product updated successfully." />);
+          } catch (error) {
+            console.log({ error });
+            toast(<NotificationError text={error.toString()} />);
+          } finally {
+            setLoading(false);
+          }
+        };
+
       const buy = async (id, price) => {
         try {
           await buyProduct({
@@ -74,7 +90,7 @@ const Products = () => {
                     product={{
                       ..._product,
                     }}
-                    buy={buy}
+                    buy={buy} edit={edit}
                   />
                 ))}
               </Row>
