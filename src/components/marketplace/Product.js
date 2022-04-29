@@ -4,10 +4,11 @@ import { utils } from "near-api-js";
 import { Card, Button, Col, Badge, Stack } from "react-bootstrap";
 
 import EditProduct from "./EditProduct";
+import DeleteProduct from "./DeleteProduct";
 
   
 
-const Product = ({ product, buy, edit }) => {
+const Product = ({ product, buy, edit, deleteFunc }) => {
   const { id, price, name, description, sold, location, image, owner } =
     product;
 
@@ -39,6 +40,7 @@ const Product = ({ product, buy, edit }) => {
 
 
           <EditProduct product={product} save={edit} />
+        <DeleteProduct productName={product.name} productId={product.id} deleteFunc={deleteFunc} />  
             
 
           <Button

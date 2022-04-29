@@ -19,5 +19,10 @@ export function getProducts() {
 }
 
 export async function buyProduct({ id, price }) {
-  await window.contract.buyProduct({ productId: id }, GAS, price);
-}
+    await window.contract.buyProduct({ productId: id }, GAS, price);
+  }
+
+  export async function deleteProduct(id) {
+      //debugger;
+    await window.contract.deleteProduct({ productId: id });
+  }

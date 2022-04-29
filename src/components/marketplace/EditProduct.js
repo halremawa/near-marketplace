@@ -146,7 +146,7 @@ const EditProduct = ( prop ) => {
                 description,
                 location,
                 price,
-                sold
+                sold,
               });
               handleCloseEdit();
             }}

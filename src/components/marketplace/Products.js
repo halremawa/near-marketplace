@@ -10,6 +10,7 @@ import {
   buyProduct,
   createProduct,
   editProduct,
+  deleteProduct,
 } from "../../utils/marketplace";
 
 const Products = () => {
@@ -44,12 +45,27 @@ const Products = () => {
       };
 
       const edit = async (data) => {
+        try {
+          setLoading(true);
+          editProduct(data).then((resp) => {
+            getProducts();
+          });
+          toast(<NotificationSuccess text="Product updated successfully." />);
+        } catch (error) {
+          console.log({ error });
+          toast(<NotificationError text={error.toString()} />);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      const deleteProd = async (id) => {
           try {
             setLoading(true);
-            editProduct(data).then((resp) => {
+            deleteProduct(id).then((resp) => {
               getProducts();
             });
-            toast(<NotificationSuccess text="Product updated successfully." />);
+            toast(<NotificationSuccess text="Product deleted successfully." />);
           } catch (error) {
             console.log({ error });
             toast(<NotificationError text={error.toString()} />);
@@ -90,7 +106,7 @@ const Products = () => {
                     product={{
                       ..._product,
                     }}
-                    buy={buy} edit={edit}
+                    buy={buy} edit={edit} deleteFunc={deleteProd}
                   />
                 ))}
               </Row>
